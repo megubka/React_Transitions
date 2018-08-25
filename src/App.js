@@ -17,19 +17,33 @@ class App extends Component {
             <h1 className="App-title">Welcome to React</h1>
           </header>
           <User />
+          <section>
+            <Toggle >  
+              {({on, toggle}) => (
+                <Fragment>
+                  <button onClick={toggle}> Show / Hide </button>
+                  {on && <h1>Show me</h1>}
+                  <Transition 
+                  from={{ opacity: 0, bg: '#82d8d8', height: '0px' }} 
+                  enter={{ opacity: 1, bg: '#524763', height: '200px' }} 
+                  leave={{ opacity: 0, bg: '#82d8d8', height: '0px' }}>
+                    { on && Header}                  
+                  </Transition>
+                </Fragment>
+              )}
+            </Toggle>
+          </section>
           <Toggle >  
             {({on, toggle}) => (
               <Fragment>
-                <button onClick={toggle}> Show / Hide </button>
-                <Transition 
-                from={{ opacity: 0, bg: '#82d8d8', height: '0px' }} 
-                enter={{ opacity: 1, bg: '#524763', height: '200px' }} 
-                leave={{ opacity: 0, bg: '#82d8d8', height: '0px' }}>
-                  { on && Header}                  
-                </Transition>
+                <button onClick={toggle}> Modal </button>
+                <Modal on={on} toggle={toggle}>
+                  <h1>Still there</h1>                
+                </Modal>
               </Fragment>
             )}
           </Toggle>
+          
 
         </div>
       </UserProvider>
